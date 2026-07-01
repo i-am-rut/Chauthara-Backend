@@ -1,12 +1,21 @@
 import express from "express";
 import "dotenv/config";
+
 import validateConfiguration from "./bootstrap/configuration/validateConfiguration.js";
+import { connectDatabase } from "./bootstrap/database/index.js";
 
-validateConfiguration();
+import appConfig from "./shared/configuration/app.config.js";
 
-const app = express();
-const PORT = 3000;
+async function startServer() {
+  validateConfiguration();
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+  await connectDatabase();
+
+  const app = express();
+
+  app.listen(appConfig.port, () => {
+    console.log(`Server running on port ${appConfig.port}`);
+  });
+}
+
+startServer();
