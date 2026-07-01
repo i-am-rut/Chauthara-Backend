@@ -7,11 +7,11 @@ const router = Router();
 
 router.get("/error-test", (req, res, next) => {
   next(
-    new AppError(
-      {statusCode: 404,
+    new AppError({
+      statusCode: 404,
       code: ErrorCodes.RESOURCE_NOT_FOUND,
-      message: "Test resource not found"}
-    )
+      message: "Test resource not found",
+    }),
   );
 });
 

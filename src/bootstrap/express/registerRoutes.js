@@ -1,7 +1,7 @@
-import routes from "../../api/routes/index.js"
+import routes from "../../api/routes/index.js";
 
 function registerRoute(app) {
-    app.use("/api", routes);
+  app.use("/api", routes);
 }
 
 export default registerRoute;

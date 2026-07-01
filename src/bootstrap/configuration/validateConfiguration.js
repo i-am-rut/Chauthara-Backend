@@ -13,13 +13,13 @@ function validateConfiguration() {
   ];
 
   const missingVariables = requiredVariables.filter(
-    variable => !variable.value
+    (variable) => !variable.value,
   );
 
   if (missingVariables.length > 0) {
     console.error("✕ Missing required environment variables:\n");
 
-    missingVariables.forEach(variable => {
+    missingVariables.forEach((variable) => {
       console.error(`- ${variable.name}`);
     });
 

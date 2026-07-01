@@ -11,7 +11,7 @@ function registerMiddleware(app) {
     cors({
       origin: true,
       credentials: true,
-    })
+    }),
   );
 }
 
