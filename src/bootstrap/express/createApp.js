@@ -1,6 +1,7 @@
 import express from "express";
 import registerMiddleware from "./registerMiddleware.js";
 import registerRoute from "./registerRoutes.js";
+import registerErrorMiddleware from "./registerErrorMiddleware.js";
 
 function createApp() {
   const app = express();
@@ -9,7 +10,7 @@ function createApp() {
 
   registerRoute(app);
 
-  registerMiddleware(app);
+  registerErrorMiddleware(app);
 
   return app;
 }

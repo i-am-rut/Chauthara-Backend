@@ -1,14 +1,7 @@
-function registerErrorMiddleware(app) {
-  app.use((err, req, res, next) => {
-    void next;
+import errorMiddleware from "../../shared/middleware/error.middleware.js";
 
-    res.status(500).json({
-      error: {
-        code: "INTERNAL_SERVER_ERROR",
-        message: "Internal Server Error",
-      },
-    });
-  });
+function registerErrorMiddleware(app) {
+  app.use(errorMiddleware);
 }
 
 export default registerErrorMiddleware;
