@@ -5,13 +5,14 @@ import validateConfiguration from "./bootstrap/configuration/validateConfigurati
 import { connectDatabase } from "./bootstrap/database/index.js";
 
 import appConfig from "./shared/configuration/app.config.js";
+import { createApp } from "./bootstrap/express/index.js"
 
 async function startServer() {
   validateConfiguration();
 
   await connectDatabase();
 
-  const app = express();
+  const app = createApp();
 
   app.listen(appConfig.port, () => {
     console.log(`Server running on port ${appConfig.port}`);
