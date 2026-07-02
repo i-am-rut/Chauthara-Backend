@@ -1,4 +1,5 @@
 import config from "../../shared/configuration/index.js";
+import logger from "../../shared/infrastructure/logging/logger.js";
 
 function validateConfiguration() {
   const requiredVariables = [
@@ -17,16 +18,16 @@ function validateConfiguration() {
   );
 
   if (missingVariables.length > 0) {
-    console.error("✕ Missing required environment variables:\n");
+    logger.error("✕ Missing required environment variables:\n");
 
     missingVariables.forEach((variable) => {
-      console.error(`- ${variable.name}`);
+      logger.error(`- ${variable.name}`);
     });
 
     process.exit(1);
   }
 
-  console.log("✓ Environment Configuration validation passed");
+  logger.info("✓ Environment Configuration validation passed");
 }
 
 export default validateConfiguration;

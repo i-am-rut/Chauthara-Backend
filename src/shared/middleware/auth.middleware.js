@@ -22,7 +22,7 @@ export const authenticate = ( req, res, next ) => {
     req.user = payload;
 
     next();
-  } catch(err) {
+  } catch {
     next(
       new AppError({
         code: ErrorCodes.AUTHENTICATION_REQUIRED,
