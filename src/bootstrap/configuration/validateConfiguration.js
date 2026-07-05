@@ -8,8 +8,20 @@ function validateConfiguration() {
       value: config.database.mongoUri,
     },
     {
-      name: "JWT_SECRET",
-      value: config.auth.jwtSecret,
+      name: "ACCESS_TOKEN_JWT_SECRET",
+      value: config.auth.AccessTokenJwtSecret,
+    },
+    {
+      name: "ACCESS_TOKEN_JWT_EXPIRES_IN",
+      value: config.auth.AccessTokenJwtExpiresIn,
+    },
+    {
+      name: "REFRESH_TOKEN_JWT_SECRET",
+      value: config.auth.RefreshTokenJwtSecret,
+    },
+    {
+      name: "REFRESH_TOKEN_JWT_EXPIRES_IN",
+      value: config.auth.RefreshTokenJwtExpiresIn,
     },
   ];
 

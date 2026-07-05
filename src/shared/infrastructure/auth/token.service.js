@@ -1,16 +1,38 @@
 import jwt from "jsonwebtoken";
-import authConfig from "../../configuration/auth.config.js";
+import config from "../../configuration/index.js";
 
-export const generateAccessToken = (payload) => {
-  return jwt.sign(
-    payload,
-    authConfig.jwtSecret,
-    {
-      expiresIn: authConfig.jwtExpiresIn,
-    }
-  );
-};
+class TokenService {
+  generateAccessToken(payload) {
+    return jwt.sign(payload, config.auth.AuthJwtSecret, { expiresIn: config.auth.AccessTokenJwtExpiresIn });
+  };
 
-export const verifyAccessToken = (token) => {
-  return jwt.verify(token, authConfig.jwtSecret);
-};
+  verifyAccessToken(token) {
+    return jwt.verify(token, config.auth.AccessTokenJwtSecret)
+  }
+
+  generateRefreshToken(payload) {
+    return jwt.sign(payload, config.auth.RefreshTokenJwtSecret, { expiresIn: config.auth.RefreshTokenJwtExpiresIn })
+  }
+  
+  verifyRefreshToken(token) {
+    return jwt.verify(token, config.auth.RefreshTokenJwtSecret)
+  }
+}
+
+const tokenService = new TokenService();
+
+export default tokenService;
+
+// export const generateAccessToken = (payload) => {
+//   return jwt.sign(
+//     payload,
+//     authConfig.AuthJwtSecret,
+//     {
+//       expiresIn: authConfig.jwtExpiresIn,
+//     }
+//   );
+// };
+
+// export const verifyAccessToken = (token) => {
+//   return jwt.verify(token, authConfig.AuthJwtSecret);
+// };
