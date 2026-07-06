@@ -1,4 +1,4 @@
-import { verifyAccessToken, } from "../infrastructure/auth/token.service.js";
+import tokenService from "../infrastructure/auth/token.service.js";
 
 import AppError from "../errors/AppError.js";
 import ErrorCodes from "../errors/errorCodes.js";
@@ -17,7 +17,7 @@ export const authenticate = ( req, res, next ) => {
     }
 
     const payload =
-      verifyAccessToken(token);
+      tokenService.verifyAccessToken(token);
 
     req.user = payload;
 

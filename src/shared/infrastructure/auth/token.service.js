@@ -3,7 +3,7 @@ import config from "../../configuration/index.js";
 
 class TokenService {
   generateAccessToken(payload) {
-    return jwt.sign(payload, config.auth.AuthJwtSecret, { expiresIn: config.auth.AccessTokenJwtExpiresIn });
+    return jwt.sign(payload, config.auth.AccessTokenJwtSecret, { expiresIn: config.auth.AccessTokenJwtExpiresIn });
   };
 
   verifyAccessToken(token) {
@@ -13,7 +13,7 @@ class TokenService {
   generateRefreshToken(payload) {
     return jwt.sign(payload, config.auth.RefreshTokenJwtSecret, { expiresIn: config.auth.RefreshTokenJwtExpiresIn })
   }
-  
+
   verifyRefreshToken(token) {
     return jwt.verify(token, config.auth.RefreshTokenJwtSecret)
   }

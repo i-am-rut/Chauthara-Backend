@@ -1,9 +1,9 @@
-export class RegisterDto {
+class RegisterDto {
   constructor({
     username,
     email,
     password,
-    name,
+    name = null
   }) {
     this.username = username;
     this.email = email;
@@ -11,3 +11,5 @@ export class RegisterDto {
     this.name = name;
   }
 }
+
+export default RegisterDto;
