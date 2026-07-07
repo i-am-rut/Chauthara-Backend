@@ -1,5 +1,4 @@
-import AppError from "../../../../shared/errors/AppError.js";
-import ErrorCodes from "../../../../shared/errors/errorCodes.js";
+import createAppError from "../../../../shared/errors/factories/createAppError.js";
 import { registerErrors } from "../../domain/errors/index.js"
 
 export default class RegisterService {
@@ -17,12 +16,12 @@ export default class RegisterService {
 
         const emailExists = await this.userRepository.existsByEmail(email);
         if (emailExists) {
-            throw new AppError({ statusCode: 400, code: ErrorCodes.RESOURCE_CONFLICT, message: registerErrors.emailConflict });
+            throw createAppError(registerErrors.emailAlreadyExists);
         }
 
         const usernameExists = await this.userRepository.existsByUsername(username);
         if (usernameExists) {
-            throw new AppError({ statusCode: 400, code: ErrorCodes.RESOURCE_CONFLICT, message: registerErrors.usernameConflict })
+            throw createAppError(registerErrors.usernameAlreadyExists);
         }
 
         const hashedPassword = await this.passwordService.hashPassword(password);
@@ -33,7 +32,6 @@ export default class RegisterService {
             passwordHash: hashedPassword,
             name: name
         });
-        console.log("User: ", user)
 
         return user;
     }

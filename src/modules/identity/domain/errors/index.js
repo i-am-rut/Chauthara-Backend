@@ -1,1 +1,1 @@
-export * from "./register.errors.js"
+export { default as registerErrors } from "./register.errors.js"

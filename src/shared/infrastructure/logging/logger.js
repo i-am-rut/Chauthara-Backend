@@ -1,6 +1,7 @@
 import winston from "winston";
 
 const logger = winston.createLogger({
+  levels: winston.config.npm.levels,
   level: "info",
 
   format: winston.format.combine(
