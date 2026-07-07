@@ -2,8 +2,10 @@ import validateConfiguration from "../configuration/validateConfiguration.js";
 import { connectDatabase } from "../database/index.js";
 import { createApp } from "../express/index.js";
 
-import appConfig from "../../shared/configuration/app.config.js";
+import config from "../../shared/configuration/index.js"
 import logger from "../../shared/infrastructure/logging/logger.js";
+
+import ErrorCodes from "../../shared/errors/errorCodes.js";
 
 async function startServer() {
   try {
@@ -13,12 +15,12 @@ async function startServer() {
 
     const app = createApp();
 
-    app.listen(appConfig.port, () => {
-      logger.info(`Server running on port ${appConfig.port}`);
+    app.listen(config.app.port, () => {
+      logger.info(`Server running on port ${config.app.port}`);
     });
-  } catch (error) {
-    logger.error("Application startup failed");
-    logger.error(error);
+  } catch (err) {
+    logger.error({ code: ErrorCodes.STARTUP_FAILED, message: "Application startup failed", errorMessage: err.message, });
+    console.log(err) // Node environment - Development only
 
     process.exit(1);
   }

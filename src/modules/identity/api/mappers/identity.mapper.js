@@ -17,3 +17,10 @@ export function toSessionResponse(user) {
   };
 }
 
+export function toRegisterResponse(user) {
+  return {
+    id: user.id,
+    username: user.username,
+    email: user.email,
+  };
+}

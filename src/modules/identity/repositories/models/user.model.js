@@ -26,6 +26,20 @@ const userSchema = new Schema(
       trim: true,
       default: null,
     },
+    emailVerified: {
+      type: Boolean,
+      default: false,
+    },
+
+    emailVerificationToken: {
+      type: String,
+      default: null,
+    },
+
+    emailVerificationExpiresAt: {
+      type: Date,
+      default: null,
+    }
   },
   {
     timestamps: true,
@@ -34,6 +48,7 @@ const userSchema = new Schema(
 
 userSchema.index({ email: 1 }, { unique: true });
 userSchema.index({ username: 1 }, { unique: true });
+userSchema.index({ emailVerificationToken: 1 });
 
 const UserModel = model("User", userSchema);
 

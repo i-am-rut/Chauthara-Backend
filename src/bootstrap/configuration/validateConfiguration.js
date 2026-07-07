@@ -1,4 +1,5 @@
 import config from "../../shared/configuration/index.js";
+import ErrorCodes from "../../shared/errors/errorCodes.js";
 import logger from "../../shared/infrastructure/logging/logger.js";
 
 function validateConfiguration() {
@@ -8,8 +9,20 @@ function validateConfiguration() {
       value: config.database.mongoUri,
     },
     {
-      name: "JWT_SECRET",
-      value: config.auth.jwtSecret,
+      name: "ACCESS_TOKEN_JWT_SECRET",
+      value: config.auth.AccessTokenJwtSecret,
+    },
+    {
+      name: "ACCESS_TOKEN_JWT_EXPIRES_IN",
+      value: config.auth.AccessTokenJwtExpiresIn,
+    },
+    {
+      name: "REFRESH_TOKEN_JWT_SECRET",
+      value: config.auth.RefreshTokenJwtSecret,
+    },
+    {
+      name: "REFRESH_TOKEN_JWT_EXPIRES_IN",
+      value: config.auth.RefreshTokenJwtExpiresIn,
     },
   ];
 
@@ -18,11 +31,15 @@ function validateConfiguration() {
   );
 
   if (missingVariables.length > 0) {
-    logger.error("✕ Missing required environment variables:\n");
+    const code = ErrorCodes.CONFIGURATION_ERROR;
+    const message = "Missing required environment variables";
+    let str = 'Missing - '
+    for (let i = 0; i < missingVariables.length; i++) {
+      str = str + missingVariables[i].name + ", "
+    }
+    const details = str;
 
-    missingVariables.forEach((variable) => {
-      logger.error(`- ${variable.name}`);
-    });
+    logger.error({ code, message, details })
 
     process.exit(1);
   }

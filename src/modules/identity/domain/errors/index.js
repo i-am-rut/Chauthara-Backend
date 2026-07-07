@@ -1,0 +1,1 @@
+export { default as registerErrors } from "./register.errors.js"

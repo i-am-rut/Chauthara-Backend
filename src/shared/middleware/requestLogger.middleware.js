@@ -5,6 +5,7 @@ export default function requestLogger(req, res, next) {
     method: req.method,
     url: req.originalUrl,
     ip: req.ip,
+    requestId: req.requestId,
   });
 
   next();
